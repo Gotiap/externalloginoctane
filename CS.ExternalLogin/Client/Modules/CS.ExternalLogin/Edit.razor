@@ -1,0 +1,100 @@
+@using Oqtane.Modules.Controls
+@using CS.ExternalLogin.Services
+@using CS.ExternalLogin.Models
+
+@namespace CS.ExternalLogin
+@inherits ModuleBase
+@inject IExternalLoginService ExternalLoginService
+@inject NavigationManager NavigationManager
+
+<table class="table table-borderless">
+    <tr>
+        <td>
+            <Label For="name" HelpText="Enter a name">Name: </Label>
+        </td>
+        <td>
+            <input id="name" class="form-control" @bind="@_name" />
+        </td>
+    </tr>
+</table>
+<button type="button" class="btn btn-success" @onclick="Save">Save</button>
+<NavLink class="btn btn-secondary" href="@NavigateUrl()">Cancel</NavLink>
+<br />
+<br />
+@if (PageState.Action == "Edit")
+{
+    <AuditInfo CreatedBy="@_createdby" CreatedOn="@_createdon" ModifiedBy="@_modifiedby" ModifiedOn="@_modifiedon"></AuditInfo>
+}
+
+@code {
+    public override SecurityAccessLevel SecurityAccessLevel => SecurityAccessLevel.Edit;
+
+    public override string Actions => "Add,Edit";
+
+    public override string Title => "Manage ExternalLogin";
+
+    public override List<Resource> Resources => new List<Resource>()
+    {
+        new Resource { ResourceType = ResourceType.Stylesheet, Url = ModulePath() + "Module.css" }
+    };
+
+    int _id;
+    string _name;
+    string _createdby;
+    DateTime _createdon;
+    string _modifiedby;
+    DateTime _modifiedon;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (PageState.Action == "Edit")
+            {
+                _id = Int32.Parse(PageState.QueryString["id"]);
+                ExternalLogin ExternalLogin = await ExternalLoginService.GetExternalLoginAsync(_id, ModuleState.ModuleId);
+                if (ExternalLogin != null)
+                {
+                    _name = ExternalLogin.Name;
+                    _createdby = ExternalLogin.CreatedBy;
+                    _createdon = ExternalLogin.CreatedOn;
+                    _modifiedby = ExternalLogin.ModifiedBy;
+                    _modifiedon = ExternalLogin.ModifiedOn;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            await logger.LogError(ex, "Error Loading ExternalLogin {ExternalLoginId} {Error}", _id, ex.Message);
+            AddModuleMessage("Error Loading ExternalLogin", MessageType.Error);
+        }
+    }
+
+    private async Task Save()
+    {
+        try
+        {
+            if (PageState.Action == "Add")
+            {
+                ExternalLogin ExternalLogin = new ExternalLogin();
+                ExternalLogin.ModuleId = ModuleState.ModuleId;
+                ExternalLogin.Name = _name;
+                ExternalLogin = await ExternalLoginService.AddExternalLoginAsync(ExternalLogin);
+                await logger.LogInformation("ExternalLogin Added {ExternalLogin}", ExternalLogin);
+            }
+            else
+            {
+                ExternalLogin ExternalLogin = await ExternalLoginService.GetExternalLoginAsync(_id, ModuleState.ModuleId);
+                ExternalLogin.Name = _name;
+                await ExternalLoginService.UpdateExternalLoginAsync(ExternalLogin);
+                await logger.LogInformation("ExternalLogin Updated {ExternalLogin}", ExternalLogin);
+            }
+            NavigationManager.NavigateTo(NavigateUrl());
+        }
+        catch (Exception ex)
+        {
+            await logger.LogError(ex, "Error Saving ExternalLogin {Error}", ex.Message);
+            AddModuleMessage("Error Saving ExternalLogin", MessageType.Error);
+        }
+    }
+}

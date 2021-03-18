@@ -1,0 +1,47 @@
+@namespace CS.ExternalLogin
+@inherits ModuleBase
+@inject ISettingService SettingService
+
+<table class="table table-borderless">
+    <tr>
+        <td>
+            <Label For="value" HelpText="Add API Url">Add API Url: </Label>
+        </td>
+        <td>
+            <input id="value" type="text" class="form-control" @bind="@_value" />
+        </td>
+    </tr>
+</table>
+
+@code {
+    public override string Title => "ExternalLogin Settings";
+
+    string _value;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Dictionary<string, string> settings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
+            _value = SettingService.GetSetting(settings, "APIURL", "");
+        }
+        catch (Exception ex)
+        {
+            ModuleInstance.AddModuleMessage(ex.Message, MessageType.Error);
+        }
+    }
+
+    public async Task UpdateSettings()
+    {
+        try
+        {
+            Dictionary<string, string> settings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
+            SettingService.SetSetting(settings, "APIURL", _value);
+            await SettingService.UpdateModuleSettingsAsync(settings, ModuleState.ModuleId);
+        }
+        catch (Exception ex)
+        {
+            ModuleInstance.AddModuleMessage(ex.Message, MessageType.Error);
+        }
+    }
+}

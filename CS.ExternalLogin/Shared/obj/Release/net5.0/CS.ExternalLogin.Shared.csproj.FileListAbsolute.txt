@@ -1,0 +1,12 @@
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\bin\Release\net5.0\CS.ExternalLogin.Shared.Oqtane.deps.json
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\bin\Release\net5.0\CS.ExternalLogin.Shared.Oqtane.dll
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\bin\Release\net5.0\ref\CS.ExternalLogin.Shared.Oqtane.dll
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\bin\Release\net5.0\CS.ExternalLogin.Shared.Oqtane.pdb
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\obj\Release\net5.0\CS.ExternalLogin.Shared.csprojAssemblyReference.cache
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\obj\Release\net5.0\CS.ExternalLogin.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\obj\Release\net5.0\CS.ExternalLogin.Shared.AssemblyInfoInputs.cache
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\obj\Release\net5.0\CS.ExternalLogin.Shared.AssemblyInfo.cs
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\obj\Release\net5.0\CS.ExternalLogin.Shared.csproj.CoreCompileInputs.cache
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\obj\Release\net5.0\CS.ExternalLogin.Shared.Oqtane.dll
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\obj\Release\net5.0\ref\CS.ExternalLogin.Shared.Oqtane.dll
+D:\Goti\CreativeSims\Demo\Oqtane\ExModule\CS.ExternalLogin\Shared\obj\Release\net5.0\CS.ExternalLogin.Shared.Oqtane.pdb
